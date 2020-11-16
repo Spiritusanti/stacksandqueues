@@ -15,6 +15,76 @@
       // both can work pretty well - memory allocation becomes the defining feature with arrays have specific memory allocated VS linked list which is more scattered and requires holding the pointers
 
 
+  // stack with linked list exercise:
+
+  // setup a Node class
+  class Node {
+    constructor(value) {
+      this.value = value;
+      this.next = null;
+    }
+  }
+
+// build out Stack object
+class Stack {
+  constructor(){
+    this.top = null;
+    this.bottom = null;
+    this.length = 0;
+  }
+  peek() {
+    // all we have to do is grab the top of the stack. E.g, this.top
+    return this.top;
+  }
+  push(value) {
+    // for adding new values to the stack
+    // we need to instantiate a new node
+    const newNode = new Node(value);
+    // check if anything is in our stack:
+    if (this.length === 0) {
+      // if it is empty --> top and bottom are equal to the newNode
+      this.top = newNode;
+      this.bottom = newNode;
+    } else {
+      // if our stack isn't empty we then need to move our pointer to the top node
+      const holdingPointer = this.top;
+      // then set top to the newNode
+      this.top = newNode;
+      // then set the next to our holdingPointer = null
+      this.top.next = holdingPointer;
+    }
+    // increment length
+    this.length++
+    return this;
+  }
+  pop() {
+    // for removing the top element from the stack
+    // check if stack is empty
+   if (!this.top){
+     return null;
+   }
+  //  check if the stack has only one element
+   if (this.top === this.bottom) {
+    //  if it does set that element to null
+     this.bottom = null;
+   }
+  //  if our stack.length is > 1 --> grab our pointer
+   const holdingPointer = this.top;
+  //  set top to the node underneath
+   this.top = this.top.next;
+  //  reduce this.length by 1
+   this.length--;
+   return this;
+  }
+}
+
+const myStack = new Stack;
+myStack.push('google');
+myStack.push('udemy');
+myStack.push('discord');
+myStack.pop();
+
+
 
   // Queues:
   // O(1)
