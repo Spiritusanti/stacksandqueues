@@ -78,13 +78,40 @@ class Stack {
   }
 }
 
-const myStack = new Stack;
-myStack.push('google');
-myStack.push('udemy');
-myStack.push('discord');
-myStack.pop();
+// const myStack = new Stack;
+// myStack.push('google');
+// myStack.push('udemy');
+// myStack.push('discord');
+// myStack.pop();
 
 
+
+// array implementation:
+
+
+class ArrStack {
+  constructor() {
+    this.array = []
+  }
+  peek(){
+    return this.array[this.array.length-1];
+  }
+  push(value) {
+    this.array.push(value)
+    return this.array
+  }
+  pop() {
+    this.array.pop()
+    return this.array
+  }
+}
+
+const myStack2 = new ArrStack;
+myStack2.push('google');
+myStack2.push('udemy');
+//myStack2.push('discord');
+ //myStack2.pop();
+//  myStack2.peek();
 
   // Queues:
   // O(1)
@@ -98,4 +125,39 @@ myStack.pop();
 
         // Array implmentation would allow us to add elements with pop and push but following the FIFO order would require a shift of all elements resulting in an O(n) operations
 
-        // Linked Lists in this case would allow us to add new elements and remove the first element with an O(1) operation since we don't have to traverse the list or shift the index. 
+        // Linked Lists in this case would allow us to add new elements and remove the first element with an O(1) operation since we don't have to traverse the list or shift the index.
+class Queue {
+  constructor() {
+    this.first = null;
+    this.last = null;
+    this.length = 0;
+  }
+  peek() {
+    return this.first;
+  }
+  enqueue(){
+    const newNode = new Node(value);
+    if (this.length === 0) {
+      this.first = newNode;
+      this.last = newNode;
+    } else {
+      this.last.next = newNode;
+      this.last = newNode;
+    }
+    this.length++;
+    return this;
+  }
+  dequeue(){
+    if (!this.first) {
+      return null
+    }
+    if (this.first === this.last) {
+      this.last = null;
+    }
+    this.first = this.first.next;
+    this.length--;
+    return this;
+  }
+}
+
+const myQueue = new Queue();
